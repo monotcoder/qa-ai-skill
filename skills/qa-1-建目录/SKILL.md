@@ -49,7 +49,7 @@ description: 给项目建一套 QA 流水线的目录结构（seeds/cases/maps/b
 
 ```
 seeds/        登录态、造数据、fixtures.json
-cases/        用例 yaml，不含任何选择器
+cases/        用例 yaml，不含任何选择器；外加一份 用例清单.md，一页纸列出有哪些流程
 prompts/      01-explore / 02-no-touch / 03-verdict / 04-bug-report
 maps/         AI 走出来的页面地图
 bindings/     业务语言 → 真实路径（界面改只动这层）
