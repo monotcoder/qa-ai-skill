@@ -119,7 +119,8 @@ skill 只规定**查什么**和几条红线。**怎么做**——用什么工具
 要用**能读写你电脑上文件的那种**，网页上的聊天框装不了。
 
 ```
-帮我装一下这个仓库里的 skill：https://github.com/monotcoder/qa-ai-skill
+帮我装一下这个仓库里的 skill：https://gitee.com/notcoder/qa-ai-skill
+（同一个仓库在 GitHub 上也有：https://github.com/monotcoder/qa-ai-skill ，哪个快用哪个）
 
 1. 把仓库克隆到一个临时目录
 2. 把 skills/ 下面的每一个目录，都整个复制到你读取 skill 的用户级目录
@@ -173,7 +174,8 @@ skill 只规定**查什么**和几条红线。**怎么做**——用什么工具
 `/qa-更新` 用不了的话，把这句话发给 AI：
 
 ```
-照 https://github.com/monotcoder/qa-ai-skill 仓库里
+照 https://gitee.com/notcoder/qa-ai-skill 仓库里
+（打不开就用 https://github.com/monotcoder/qa-ai-skill ）
 skills/qa-更新/SKILL.md 的步骤，帮我把这套 skill 更新到最新版。
 ```
 
@@ -211,8 +213,10 @@ skills/qa-更新/SKILL.md 的步骤，帮我把这套 skill 更新到最新版�
 会命令行的话：
 
 ```bash
-git clone https://github.com/monotcoder/qa-ai-skill
+git clone https://gitee.com/notcoder/qa-ai-skill
 ```
+
+Gitee 打不开就换 GitHub：`https://github.com/monotcoder/qa-ai-skill`，内容一样。
 
 然后把 `qa-ai-skill/skills/` 下的所有目录，复制到你的 AI 工具的用户级 skill 目录。目录在哪，看它的文档。
 

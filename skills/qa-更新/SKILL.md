@@ -1,6 +1,6 @@
 ---
 name: qa-更新
-description: 把 qa- 开头的这套 QA 流水线 skill 更新到 GitHub 上的最新版。用户说"更新 qa skill""qa 流水线有新版吗""升级 qa-"时使用。只管这套 skill 本身，不是更新 npm 依赖、项目代码，也不是更新 AI 工具。
+description: 把 qa- 开头的这套 QA 流水线 skill 更新到最新版（GitHub 和 Gitee 上都有，哪个连得上用哪个）。用户说"更新 qa skill""qa 流水线有新版吗""升级 qa-"时使用。只管这套 skill 本身，不是更新 npm 依赖、项目代码，也不是更新 AI 工具。
 ---
 
 <!-- qa-ai-skill id=update version=1.3.5 -->
@@ -19,7 +19,16 @@ QA 流水线 v1.3.5 · qa-更新
 版本号就是这个文件开头那行注释里的 `version`，**不要去磁盘上读文件来报** ——
 你报的必须是你现在加载的这一份。学员出问题时，作者靠这一行知道他跑的是哪一版。
 
-仓库：https://github.com/monotcoder/qa-ai-skill
+仓库有两个地址，**内容一样，每次发版两边同时推**：
+
+| | 地址 | 不用 git 时查 tag 的地址 |
+| --- | --- | --- |
+| GitHub | https://github.com/monotcoder/qa-ai-skill | `https://api.github.com/repos/monotcoder/qa-ai-skill/tags` |
+| Gitee（国内快） | https://gitee.com/notcoder/qa-ai-skill | `https://gitee.com/api/v5/repos/notcoder/qa-ai-skill/tags` |
+
+用哪个：用户说了用哪个就用哪个。没说的，**先试 Gitee**（国内连 GitHub 常常很慢或者卡住），
+等 10 秒左右没反应就换 GitHub。两个都连得上、版本号不一样的，用大的那个
+（作者两边同时推，偶尔有一边慢一步）。用了哪个，跟用户说一声。
 
 用户不懂命令行，全程你来做，每一步用大白话说你在干什么。
 
@@ -31,18 +40,17 @@ QA 流水线 v1.3.5 · qa-更新
 
 - 本地：skill 目录里 `qa-更新/版本.json` 的 `版本`
 - 最新：**只查仓库的 tag，不下载仓库**。有 git 就用 `git ls-remote --tags <仓库地址>`，
-  没有 git 就读 `https://api.github.com/repos/monotcoder/qa-ai-skill/tags`。
-  取 `v` 开头、版本号最大的那个
+  没有 git 就读上面表里「查 tag 的地址」。取 `v` 开头、版本号最大的那个
 
 **以 tag 为准，不以 main 分支为准。** main 上可能有作者还没发版的改动，那不该装到用户电脑上。
 
 一样 → 告诉用户"已经是最新版"，结束。**什么都没下载，什么都不用删。**
 
-查不到（连不上 GitHub）→ 直说连不上，不要猜版本号。开了代理的，命令行可能不走代理，先提醒他看一眼。
+查不到（两个地址都连不上）→ 直说连不上，不要猜版本号。开了代理的，命令行可能不走代理，先提醒他看一眼。
 
 ## 3. 有新版才下载，并先换成最新版的自己
 
-把**最新那个 tag** 下载到一个临时目录（要带上所有 tag，第 6 步要用旧版对比）。
+把**最新那个 tag** 从第 2 步用的那个地址下载到一个临时目录（要带上所有 tag，第 6 步要用旧版对比）。
 
 如果里面的 `skills/qa-更新/SKILL.md` 跟你现在读的这份不一样，
 **停下，改为照新版那份执行。**
