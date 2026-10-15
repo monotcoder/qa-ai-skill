@@ -272,6 +272,10 @@ QA 流水线 v1.4.0 · qa-1-建目录
 
 用了哪个浏览器写进 `项目适配.md` 的「工具」那一段。
 
+**工具自己的输出放进一个隐藏目录**，别摊在项目根目录：Playwright 的 `outputDir` 设成 `.playwright/结果`，
+html 报告的 `outputFolder` 设成 `.playwright/报告页`（`npm run report` 跟着改），回放用 `trace: 'retain-on-failure'`。
+`.gitignore` 里写 `.playwright/`。要留下来给人看的，由 `/qa-4-跑测试` 挑出来放进 `报告/`。
+
 常见的一个：Playwright 的登录脚本放在 `测试数据/`，而全局 `testDir` 是 `./脚本` ——
 登录那个 project 要单独写 `testDir: './测试数据'`，不然报 `No tests found`。
 
