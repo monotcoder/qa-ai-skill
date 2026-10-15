@@ -3,9 +3,15 @@ name: qa-更新
 description: 把 qa- 开头的这套 QA 流水线 skill 更新到 GitHub 上的最新版。用户说"更新 qa skill""qa 流水线有新版吗""升级 qa-"时使用。只管这套 skill 本身，不是更新 npm 依赖、项目代码，也不是更新 AI 工具。
 ---
 
-<!-- qa-ai-skill id=update -->
+<!-- qa-ai-skill id=update version=1.3.2 -->
 
 # 更新这套 skill
+
+## 开口第一句：报版本
+
+开始做之前，第一句先说：「现在用的是 `qa-更新` 1.3.2」。
+版本号就是这个文件开头那行注释里的 `version`，**不要去磁盘上读文件来报** ——
+你报的必须是你现在加载的这一份。学员出问题时，作者靠这一句知道他跑的是哪一版。
 
 仓库：https://github.com/monotcoder/qa-ai-skill
 
@@ -55,7 +61,7 @@ description: 把 qa- 开头的这套 QA 流水线 skill 更新到 GitHub 上的�
 ## 5. 按 id 认领本地的 skill
 
 扫 skill 目录下每个 `SKILL.md`，看 frontmatter 下面紧挨着的那一行 HTML 注释，
-形如 `qa-ai-skill id=setup`。**只认这一行**，正文里别处出现的不算。
+形如 `qa-ai-skill id=setup version=1.3.2`，只看其中的 `id`。**只认这一行**，正文里别处出现的不算。
 
 **按 id 认，不按目录名认** —— 用户可能改过名字。
 
@@ -71,7 +77,8 @@ description: 把 qa- 开头的这套 QA 流水线 skill 更新到 GitHub 上的�
 ## 6. 查他有没有改过内容
 
 每个要更新的 skill：取仓库 `v<本地版本>` 这个 tag 下的同一个目录，跟本地比。
-**忽略目录名和 `name:` 那一行** —— 那是改名，不是改内容。
+**忽略目录名、`name:` 那一行，以及 id 那行注释里的 `version=` 和正文里写着版本号的地方** ——
+前者是改名，后者每次发版都会变，都不是他改了内容。
 
 取不到那个 tag，就当作改过。
 
