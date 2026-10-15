@@ -3,7 +3,7 @@ name: qa-1-建目录
 description: 给项目建一套 QA 流水线的目录结构（测试数据/用例/地图/绑定/脚本/提示词/报告/校准，目录和文件名都用中文）。用户说"建 QA 目录""搭测试流水线的结构"时使用。注意：这不是 git init，也不是建项目脚手架，只建测试用的目录。
 ---
 
-<!-- qa-ai-skill id=setup version=1.3.4 -->
+<!-- qa-ai-skill id=setup version=1.3.5 -->
 
 # 第 1 步 · 建目录结构
 
@@ -12,7 +12,7 @@ description: 给项目建一套 QA 流水线的目录结构（测试数据/用�
 开始做之前，**第一行单独写**：
 
 ```
-QA 流水线 v1.3.4 · qa-1-建目录
+QA 流水线 v1.3.5 · qa-1-建目录
 ```
 
 就这一行，不加别的话，像软件标题栏那样。直接写出来，不用放进代码块。
@@ -27,7 +27,7 @@ QA 流水线 v1.3.4 · qa-1-建目录
 - 项目里 `.qa-ai.json` 的版本比你报的新 → 这个项目是更新的版本建的，提醒他先打 `/qa-更新`
 
 这一步新写或改过的文档（地图、覆盖表、用例清单、报告、问题单、变更单），标题下面写一行
-`生成：QA 流水线 v1.3.4 · qa-1-建目录 · <日期>`。改已有的文档，把这一行改成这一次的。
+`生成：QA 流水线 v1.3.5 · qa-1-建目录 · <日期>`。改已有的文档，把这一行改成这一次的。
 
 ## 先看是新建还是补齐
 
@@ -218,8 +218,34 @@ QA 流水线 v1.3.4 · qa-1-建目录
 
 ## 生成完，先自己跑一次登录
 
-装好依赖（按选定的工具来，Playwright 是 `npm i && npx playwright install chromium`），
+装好依赖（按选定的工具来，Playwright 是 `npm i`），
 **把存登录态的脚本跑一遍，跑通了才算建完**。生成的配置有错，用户第一步就会卡住。
+
+### 浏览器：先用电脑上已经有的，别上来就下载
+
+`npx playwright install` 要下好几百 MB，网不好要等很久，国内还经常下不动。
+而且 Playwright 每升一个版本要的浏览器就不一样，以前下过的也用不上。
+**大多数人电脑上已经有 Chrome 或 Edge，直接用它。**
+
+1. 先查有没有（只看文件在不在，不打开浏览器）：
+   - Mac：`/Applications/Google Chrome.app`、`/Applications/Microsoft Edge.app`
+   - Windows：`Program Files` 或 `Program Files (x86)` 下的 `Google\Chrome\Application\chrome.exe`、
+     `Microsoft\Edge\Application\msedge.exe`，还有 `%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe`。
+     Windows 10 以后都自带 Edge
+   - Linux：`which google-chrome microsoft-edge`
+2. 有 Chrome 用 Chrome，没有就用 Edge。在 `playwright.config.ts` 的 `use` 里写
+   `channel: 'chrome'`（Edge 写 `'msedge'`），登录命令也带上 `--channel=chrome`。
+   **这样不用下载任何浏览器**。测试用的是单独的一份空白资料，不碰用户平时浏览器里的书签和登录
+3. 两个都没有：**请用户自己装一个**，给他官网链接，装好告诉你一声。
+   打不开 Chrome 官网（国内常见）就装 Edge：https://www.microsoft.com/zh-cn/edge 。
+   用户自己点安装比 AI 在后台下载快，也看得见进度
+4. 用户明确说「你帮我下」，才跑 `npx playwright install chromium`。
+   跑之前告诉他：要下几百 MB，可能要十几分钟，下不动就回到第 3 条
+
+用了哪个浏览器写进 `项目适配.md` 的「工具」那一段。
+
+`npm i` 本身也慢、卡住不动的（国内常见），这一次加 `--registry=https://registry.npmmirror.com`，
+不要改用户全局的 npm 设置。
 
 常见的一个：Playwright 的登录脚本放在 `测试数据/`，而全局 `testDir` 是 `./脚本` ——
 登录那个 project 要单独写 `testDir: './测试数据'`，不然报 `No tests found`。
@@ -229,9 +255,11 @@ QA 流水线 v1.3.4 · qa-1-建目录
 
 ```json
 "scripts": {
-  "login": "playwright codegen --save-storage=测试数据/登录态/企业用户.json <登录页>"
+  "login": "playwright codegen --channel=chrome --save-storage=测试数据/登录态/企业用户.json <登录页>"
 }
 ```
+
+用的是 Edge，把 `--channel=chrome` 换成 `--channel=msedge`。
 
 密码不进任何文件。用户把密码发给你了，**明确拒绝使用，并建议他改密码**。
 
